@@ -10,7 +10,7 @@
 <form method="post">
     {% csrf_token %}
 	<label for="search">Search</label>
-	<input id="search" type="search" pattern=".*\S.*" required>
+	<input id="search" type="search" name="keyword" pattern=".*\S.*" required>
 	<span class="caret"></span>
 </form>
 </body>
