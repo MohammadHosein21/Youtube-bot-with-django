@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import bot
+from .views import search
 
 urlpatterns = [
-    path('', bot)
+    path('', search)
 ]
