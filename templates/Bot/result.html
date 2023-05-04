@@ -17,8 +17,42 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container" >
-    <div class="row border-bottom p-3 mb-2 bg-dark text-white" >
+{#<nav aria-label="Page navigation example">#}
+{#  <ul class="pagination justify-content-center">#}
+{#      {% if page_obj.has_previous %}#}
+{#    <li class="page-item disabled">#}
+{#      <a class="page-link" href="#" tabindex="-1">Previous</a>#}
+{#    </li>#}
+{#      {% endif %}#}
+{#    <li class="page-item"><a class="page-link" href="#">1</a></li>#}
+{#    <li class="page-item"><a class="page-link" href="#">2</a></li>#}
+{#    <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+{#    <li class="page-item">#}
+{#      <a class="page-link" href="#">Next</a>#}
+{#    </li>#}
+{#  </ul>#}
+{#</nav>#}
+{% if page_obj %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current-page">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+{% endif %}
+<div class="container">
+    <div class="row border-bottom p-3 mb-2 bg-dark text-white">
         <div class="col-4 border-right">
             Title
         </div>
@@ -29,16 +63,16 @@
             Urls
         </div>
     </div>
-    {% for result in results %}
+    {% for obj in page_obj %}
         <div class="row border-bottom p-3 mb-2 bg-light text-dark">
             <div class="col-4 border-right">
-                {{ result.title }}
+                {{ obj.title }}
             </div>
             <div class="col-2 border-right">
-                {{ result.subscriber }}
+                {{ obj.subscriber }}
             </div>
             <div class="col-6">
-                {{ result.link }}
+                {{ obj.link }}
             </div>
         </div>
     {% endfor %}

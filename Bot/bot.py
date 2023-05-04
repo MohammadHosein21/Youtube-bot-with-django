@@ -84,24 +84,24 @@ def search(keyword):
         order='relevance'
     )
     response = request.execute()
-
-    for item in response['items']:
-        channelId = item['id']['channelId']
-        channelTitle = item['snippet']['title']
-
-        request = youtube.channels().list(
-            part="statistics",
-            id=channelId
-        )
-        response = request.execute()
-
-        subscriberCount = response['items'][0]['statistics']['subscriberCount']
-        channelUrl = f"https://www.youtube.com/channel/{channelId}"
-
-        Channel.objects.create(title=channelTitle, subscriber=subscriberCount, link=channelUrl, keyword=keyword)
-
     if 'nextPageToken' in response:
         nextPage = response['nextPageToken']
+        for item in response['items']:
+            channelId = item['id']['channelId']
+            channelTitle = item['snippet']['title']
+
+            request = youtube.channels().list(
+                part="statistics",
+                id=channelId
+            )
+            response = request.execute()
+
+            subscriberCount = response['items'][0]['statistics']['subscriberCount']
+            channelUrl = f"https://www.youtube.com/channel/{channelId}"
+
+            Channel.objects.create(title=channelTitle, subscriber=subscriberCount, link=channelUrl, keyword=keyword)
+
+        # if 'nextPageToken' in response:
         if nextPage == 'CDIQAA':
             request = youtube.search().list(
                 part="id,snippet",
@@ -127,4 +127,21 @@ def search(keyword):
 
             Channel.objects.create(title=channelTitle, subscriber=subscriberCount, link=channelUrl, keyword=keyword)
 
-    return Channel.objects.filter(keyword=keyword).order_by('-subscriber')
+        return Channel.objects.filter(keyword=keyword).order_by('-subscriber')
+
+    else:
+        for item in response['items']:
+            channelId = item['id']['channelId']
+            channelTitle = item['snippet']['title']
+
+            request = youtube.channels().list(
+                part="statistics",
+                id=channelId
+            )
+            response = request.execute()
+
+            subscriberCount = response['items'][0]['statistics']['subscriberCount']
+            channelUrl = f"https://www.youtube.com/channel/{channelId}"
+
+            Channel.objects.create(title=channelTitle, subscriber=subscriberCount, link=channelUrl, keyword=keyword)
+        return Channel.objects.filter(keyword=keyword).order_by('-subscriber')
