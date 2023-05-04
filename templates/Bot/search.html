@@ -3,14 +3,14 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>result</title>
+    <title>Search</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
 </head>
 <body>
 <form method="post">
     {% csrf_token %}
 	<label for="search">Search</label>
-	<input id="search" type="search" name="keyword" pattern=".*\S.*" required>
+	<input id="search" type="search" pattern=".*\S.*" required>
 	<span class="caret"></span>
 </form>
 </body>
