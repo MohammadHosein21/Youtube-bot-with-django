@@ -1,8 +1,10 @@
+import math
+
 from django.shortcuts import render
 from .forms import SearchForm
 from .bot import search
 from .models import Channel
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.paginator import Paginator
 from django.shortcuts import redirect
 
 
@@ -25,4 +27,8 @@ def resultView(request):
     paginator = Paginator(results, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'Bot/result.html', {'page_obj': page_obj})
+    page_count = math.ceil(len(results) / 20)
+    page_list = []
+    for i in range(1, page_count + 1):
+        page_list.append(i)
+    return render(request, 'Bot/result.html', {'page_obj': page_obj, 'page_list': page_list})
