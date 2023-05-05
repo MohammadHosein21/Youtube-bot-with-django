@@ -30,37 +30,43 @@
         <div class="col-6"></div>
         <div class="col-sm-2">
             <a href="{% url 'search-view' %}">
-                <button type="button" class="btn btn-outline-primary btn-lg">Search <i class="fa fa-search"></i></button>
+                <button type="button" class="btn btn-outline-primary btn-lg">Search <i class="fa fa-search"></i>
+                </button>
             </a>
         </div>
 
     </div>
 </div>
 <div class="container">
-    <div class="row border-bottom p-3 mb-2 bg-dark text-white">
-        <div class="col-4 border-right">
-            Title
-        </div>
-        <div class="col-2  border-right">
-            Subscriber
-        </div>
-        <div class="col-6 ">
-            Urls
-        </div>
-    </div>
-    {% for obj in page_obj %}
-        <div class="row border-bottom p-3 mb-2 bg-light text-dark">
+    {% if page_obj %}
+        <div class="row border-bottom p-3 mb-2 bg-dark text-white">
             <div class="col-4 border-right">
-                {{ obj.title }}
+                Title
             </div>
-            <div class="col-2 border-right">
-                {{ obj.subscriber }}
+            <div class="col-2  border-right">
+                Subscriber
             </div>
-            <div class="col-6">
-                {{ obj.link }}
+            <div class="col-6 ">
+                Urls
             </div>
         </div>
-    {% endfor %}
+
+        {% for obj in page_obj %}
+            <div class="row border-bottom p-3 mb-2 bg-light text-dark">
+                <div class="col-4 border-right">
+                    {{ obj.title }}
+                </div>
+                <div class="col-2 border-right">
+                    {{ obj.subscriber }}
+                </div>
+                <div class="col-6">
+                    {{ obj.link }}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        There is nothing to show !!!
+    {% endif %}
 </div>
 {% if page_obj %}
     <nav aria-label="Page navigation example">
