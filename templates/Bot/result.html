@@ -20,17 +20,19 @@
 <body>
 
 <br>
-<div class="alert alert-sm alert-dark" role="alert">
-  This is a dark alert—check it out!
+<div class="container">
+    <div class="row">
+        <div class="col-4 alert alert-info" role="alert">
+            Results for {{ keyword }}:
+        </div>
+        <div class="col-6"></div>
+        <div class="col-sm-2">
+            <a href="{% url 'search-view' %}">
+                <button type="button" class="btn btn-info">Back to search</button>
+            </a>
+        </div>
+    </div>
 </div>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<span class="badge badge-primary">Primary</span>
-<span class="badge badge-pill badge-primary">Primary</span>
 <div class="container">
     <div class="row border-bottom p-3 mb-2 bg-dark text-white">
         <div class="col-4 border-right">
