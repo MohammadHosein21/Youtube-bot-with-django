@@ -31,4 +31,5 @@ def resultView(request):
     page_list = []
     for i in range(1, page_count + 1):
         page_list.append(i)
-    return render(request, 'Bot/result.html', {'page_obj': page_obj, 'page_list': page_list, 'keyword': keyword})
+    context = {'page_obj': page_obj, 'page_list': page_list, 'keyword': keyword, 'results_count': len(results)}
+    return render(request, 'Bot/result.html', context)

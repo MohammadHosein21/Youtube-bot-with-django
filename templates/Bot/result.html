@@ -23,19 +23,34 @@
 
 <br>
 <div class="container">
-    <div class="row">
-        <div class="col-4 alert alert-info" role="alert">
-            Results for {{ keyword }}:
+    {% if page_obj %}
+        <div class="row">
+            <div class="col-4 alert alert-info" role="alert">
+                {{ results_count }} Results for {{ keyword }}:
+            </div>
+            <div class="col-6"></div>
+            <div class="col-sm-2">
+                <a href="{% url 'search-view' %}">
+                    <button type="button" class="btn btn-outline-primary btn-lg">Search <i class="fa fa-search"></i>
+                    </button>
+                </a>
+            </div>
         </div>
-        <div class="col-6"></div>
-        <div class="col-sm-2">
-            <a href="{% url 'search-view' %}">
-                <button type="button" class="btn btn-outline-primary btn-lg">Search <i class="fa fa-search"></i>
-                </button>
-            </a>
+    {% else %}
+                <div class="row">
+            <div class="col-4 alert alert-info" role="alert">
+                There is nothing to show !!!
+            </div>
+            <div class="col-6"></div>
+            <div class="col-sm-2">
+                <a href="{% url 'search-view' %}">
+                    <button type="button" class="btn btn-outline-primary btn-lg">Search <i class="fa fa-search"></i>
+                    </button>
+                </a>
+            </div>
         </div>
+    {% endif %}
 
-    </div>
 </div>
 <div class="container">
     {% if page_obj %}
@@ -64,8 +79,6 @@
                 </div>
             </div>
         {% endfor %}
-    {% else %}
-        There is nothing to show !!!
     {% endif %}
 </div>
 {% if page_obj %}
