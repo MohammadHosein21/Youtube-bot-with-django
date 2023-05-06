@@ -22,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v$4omsj$)^%a87#xe^l!pofhnge3%^xjdja=(5u4ls*#jpkexa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -80,7 +81,16 @@ DATABASES = {
         'PASSWORD': 'Hosein_77',
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DATABASE-NAME', 'postgres'),
+#         'USER': os.environ.get('DATABASE-USER', 'postgres'),
+#         'PASSWORD': os.environ.get('DATABASE-PASSWORD', 'postgres'),
+#         'HOST': os.environ.get('DATABASE-HOST', 'database'),
+#         'PORT': os.environ.get('DATABASE-PORT', 5432)
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -117,6 +127,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static/"),
 )
+MEDIA_URL = 'media/'
+
+STATIC_ROOT = "/static"
+MEDIA_ROOT = BASE_DIR / "media"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
