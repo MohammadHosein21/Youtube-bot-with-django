@@ -1,15 +1,12 @@
-FROM python:3.10-slim-buster
+FROM python:latest
 
-WORKDIR /usr/src/app
+WORKDIR /code
 
-ENV PYTHONDONTWRITTENBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+COPY requirements.txt /code/
 
-RUN apt-get update && apt-get install -y build-essential libpq-dev
-RUN rm -rf /var/lib/apt/lists/*
+RUN pip install -U pip
+RUN pip install -r requirements.txt
 
-COPY . .
+COPY . /code/
 
-RUN pip install --upgrade pip && pip install -r requirements.txt
-
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "YoutubeBot.wsgi", ":8000"]

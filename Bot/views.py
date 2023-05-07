@@ -1,14 +1,11 @@
 import math
 
 from django.shortcuts import render
-from .forms import SearchForm
 from .bot import search
 from .models import Channel
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 
-
-# Create your views here.
 
 def searchView(request):
     if request.method == 'POST':
