@@ -4,7 +4,7 @@ from .models import Channel
 
 
 def search(keyword):
-    api_key = "AIzaSyDeAmMZ6raZiZkWi_AgLVIIq1kg9Pb7rP8"
+    api_key = "Your API Key"
     youtube = build('youtube', 'v3', developerKey=api_key)
     query = urllib.parse.quote(keyword)
     request = youtube.search().list(
