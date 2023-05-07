@@ -4,3 +4,4 @@ This project is a web-based YouTube bot written in Python and the Django framewo
 ## Dependencies
 - Postgresql
 - Youtube Data API
+- Bootstrap
